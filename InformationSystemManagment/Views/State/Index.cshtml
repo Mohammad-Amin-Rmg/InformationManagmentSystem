@@ -1,0 +1,36 @@
+﻿@using InformationSystemManagment.Dto.State;
+@model List<GetStatesDto>;
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="text-center">
+    <p class="card-text">لیست استان ها</p>
+    <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+        <div class="col-sm-12">
+            <table class="table table-striped table-bordered zero-configuration dataTable" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info">
+                <thead>
+                    <tr role="row">
+                        
+                        <th class="sorting_asc">کشور </th>
+                        <th class="sorting_asc">پیش شماره </th>
+                        <th class="sorting_asc">جمعیت</th>
+                        <th class="sorting_asc">نام</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr role="row">
+                            <td>@item.CountryName</td>
+                            <td>@item.Code</td>
+                            <td>@string.Format("{0:n0} نفر", item.Population)</td>
+                            <td>@item.Name</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

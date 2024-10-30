@@ -1,0 +1,41 @@
+﻿@using InformationSystemManagment.ViewModel;
+@model List<SearchResultViewModel>;
+
+<div class="text-center">
+
+    <form asp-action="Index" asp-controller="Search" class="form-search" method="get">
+        <div class="row mb-5">
+            <input type="search" class="header-search-input" name="searchKey" placeholder="جستجو">
+            <div class="action-btns row">
+
+                <div class="mb-2">
+                    <button style="background-color:darkgray" type="submit" class="btn">
+                        <i class="fa fa-search">Search</i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+    
+    <div>
+        @if (Model.Count > 0)
+        {
+            <h2>نتایج جستجو</h2>
+            <ul>
+
+                @foreach (var result in Model)
+                {
+                    <li><strong>@result.Name (@result.EntityType) - @result.Population - @result.AdditionalInfo</strong></li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>برای جست و جوی شما هیچ نتیجه ای یافت نشد</p>
+        }
+
+    </div>
+
+</div>

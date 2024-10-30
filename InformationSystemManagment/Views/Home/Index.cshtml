@@ -1,0 +1,22 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="text-center container">
+    <h1 class="display-4">Welcome</h1>
+    <div class="row">
+        <div class="col"><a asp-controller="Country" asp-action="Index">نمایش کشورها</a></div>
+        <div class="col"> <a asp-controller="Country" asp-action="Create">ثبت کشور</a></div>
+        <div class="w-100"></div>
+        <div class="col"><a asp-controller="State" asp-action="Index">نمایش استان ها </a></div>
+        <div class="col"> <a asp-controller="State" asp-action="Create">ثبت استان</a></div>
+        <div class="w-100"></div>
+        <div class="col"><a asp-controller="City" asp-action="Index">نمایش شهرها </a></div>
+        <div class="col"> <a asp-controller="City" asp-action="Create">ثبت شهر</a></div>
+        <div class="w-100"></div>
+        <div class="col"><a asp-controller="Town" asp-action="Index">نمایش روستاها </a></div>
+        <div class="col"> <a asp-controller="Town" asp-action="Create">ثبت روستا</a></div>
+        <div> <a asp-controller="Search" asp-action="Index">جستجو</a></div>
+    </div>
+
+
+</div>

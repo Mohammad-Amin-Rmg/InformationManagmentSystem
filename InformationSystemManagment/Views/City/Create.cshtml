@@ -1,0 +1,106 @@
+﻿@using InformationSystemManagment.Dto.CityDto;
+@model PostCityDto;
+@{
+    ViewData["Title"] = "Create";
+}
+
+<head>
+    <style>
+        #map {
+            height: 200px;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<div class="text-center">
+    <div class="form-group">
+        <form class="form-group" asp-controller="City" asp-action="Create" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                    <label class="col-form-label">نام شهر</label>
+                    <input asp-for="Name" type="text" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                    <label class="col-form-label">جمعیت </label>
+                    <input asp-for="Population" type="text" class="form-control" />
+                    <span asp-validation-for="Population" class="text-danger"></span>
+                </div>
+
+                <div class="col-xl-4 col-lg-6 col-md-12 mb-1">
+                    <fieldset class="form-group">
+                        <label class="col-form-label" for="State">استان</label>
+                        <select class="form-control" asp-for="StateId" asp-items="@ViewBag.States">
+                            <option> استان ها</option>
+                        </select>
+                    </fieldset>
+                </div>
+
+                <div class="form-group">
+                    <div id="map"></div>
+
+                    <input type="hidden" asp-for="Latitude" />
+                    <input type="hidden" asp-for="Longitude" />
+                </div>
+
+                <div class="row mt-2">
+                    <button type="submit" class="btn btn-success">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Css {
+    <link href="~/lib/leaflet/leaflet.css" rel="stylesheet" />
+}
+
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/lib/leaflet/leaflet.js"></script>
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(document).ready(function () {
+            initializeMap();
+        });
+
+        function initializeMap() {
+            var _lat = '35.69971058703441';
+            var _long = '51.33791851292726';
+
+            var map = L.map('map', { scrollWheelZoom: false }).setView([parseFloat(_lat), parseFloat(_long)], 15);
+            //var map = L.map('map').setView([51.505, -0.09], 13);
+
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19
+            }).addTo(map);
+
+            var marker = L.marker([_lat, _long]).addTo(map);
+
+
+
+            setTimeout(function () {
+                L.Unit, requestAnimationFrame(map.invalidateSize, map, !1, map._container);
+            }, 3000);
+
+            function onMapClick(e) {
+                _lat = e.latlng.lat;
+                _long = e.latlng.lng;
+                $('#Latitude').val(_lat);
+                $('#Longitude').val(_long);
+                marker.setLatLng(e.latlng);
+            }
+
+            map.on('click', onMapClick);
+
+        }
+
+    </script>
+}
