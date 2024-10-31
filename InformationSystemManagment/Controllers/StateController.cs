@@ -47,9 +47,9 @@ public class StateController : Controller
         if (ModelState.IsValid)
         {
             await _createStateService.Execute(postState);
-            return View();
+            return RedirectToAction(nameof(Index));
         }
 
-        return View(postState);
+        return View();
     }
 }

@@ -43,9 +43,9 @@ public class CountryController : Controller
         if (ModelState.IsValid)
         {
             await _createCountryService.Execute(postCountryDto);
-            return View();
+            return RedirectToAction(nameof(Index));
         }
 
-        return View(postCountryDto);
+        return View();
     }
 }

@@ -47,9 +47,9 @@ public class CityController : Controller
         if (ModelState.IsValid)
         {
             await _createCityService.Execute(postCity);
-            return View();
+            return RedirectToAction(nameof(Index));
         }
 
-        return View(postCity);
+        return View();
     }
 }
